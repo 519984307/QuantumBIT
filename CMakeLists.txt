@@ -7,15 +7,17 @@ set(CMAKE_AUTORCC ON)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(spdlog_ROOT ${CppLibrary}/spdlog/spdlog-debug)
     set(json_ROOT ${CppLibrary}/json/nlohmann_json-debug)
+    set(stduuid_ROOT ${CppLibrary}/stduuid/stduuid-debug)
 elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(spdlog_ROOT ${CppLibrary}/spdlog/spdlog-release)
     set(json_ROOT ${CppLibrary}/json/nlohmann_json-release)
+    set(stduuid_ROOT ${CppLibrary}/stduuid/stduuid-release)
 endif ()
 
 set(BOOST_ROOT ${CppLibrary}/Boost)
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-set(BOOST_COMPONENT )
+set(BOOST_COMPONENT)
 set(qt_ROOT ${CppLibrary}/Qt6)
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${spdlog_ROOT} ${qt_ROOT} ${json_ROOT})
 
@@ -30,15 +32,20 @@ get_target_property(JSON_INC_DIR nlohmann_json::nlohmann_json INTERFACE_INCLUDE_
 
 find_package(Boost REQUIRED ${BOOST_COMPONENT})
 
+
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${SPDLOG_INC_DIR})
 include_directories(${JSON_INC_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${stduuid_ROOT}/include)
+include_directories(${PROJECT_SOURCE_DIR}/src)
+
 
 file(GLOB_RECURSE HEAD_FILE "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_SOURCE_DIR}/include/*.hpp")
 file(GLOB_RECURSE SOURCE_FILE "${PROJECT_SOURCE_DIR}/src/*.cpp" "${PROJECT_SOURCE_DIR}/src/*.hpp")
 file(GLOB_RECURSE QRC_FILE "${PROJECT_SOURCE_DIR}/qrc/*.qrc")
 file(GLOB_RECURSE ASG_DLL "${PROJECT_SOURCE_DIR}/lib/*.lib")
+
 add_executable(${PROJECT_NAME} ${HEAD_FILE} ${SOURCE_FILE} ${QRC_FILE})
 target_link_libraries(${PROJECT_NAME} Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Charts)
 target_link_libraries(${PROJECT_NAME} spdlog::spdlog)

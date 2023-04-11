@@ -1,0 +1,12 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+        <file>stylesheet/AMOLED.qss</file>
+        <file>stylesheet/Aqua.qss</file>
+        <file>stylesheet/ConsoleStyle.qss</file>
+        <file>stylesheet/MacOS.qss</file>
+        <file>stylesheet/ManjaroMix.qss</file>
+        <file>stylesheet/MaterialDark.qss</file>
+        <file>stylesheet/NeoButtons.qss</file>
+        <file>stylesheet/Ubuntu.qss</file>
+    </qresource>
+</RCC>
